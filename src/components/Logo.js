@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import logoDark from 'assets/images/logo-dark.png';
 import logoLight from 'assets/images/logo-light.png';
@@ -14,5 +15,9 @@ const Logo = ({ type }) => (
     />
   </Link>
 );
+
+Logo.propTypes = {
+  type: PropTypes.oneOf(['dark', 'light']).isRequired,
+};
 
 export default Logo;

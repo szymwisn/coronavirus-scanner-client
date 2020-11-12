@@ -25,6 +25,9 @@ const Root = () => {
   const dispatch = useDispatch();
   const citizens = useSelector((state) => state.citizensReducers.citizens);
   const reports = useSelector((state) => state.reportsReducers.reports);
+  const unsolvedReports = useSelector(
+    (state) => state.reportsReducers.unsolvedReports,
+  );
   const statistics = useSelector(
     (state) => state.statisticsReducers.statistics,
   );
@@ -41,7 +44,7 @@ const Root = () => {
       <BrowserRouter>
         {userId ? (
           <UserContext.Provider value={{ userId }}>
-            <AuthorizedTemplate>
+            <AuthorizedTemplate unsolvedReports={unsolvedReports}>
               <Switch>
                 <Route path={routes.reports} exact>
                   <Reports reports={reports} />

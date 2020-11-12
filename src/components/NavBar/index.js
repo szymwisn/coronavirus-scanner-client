@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 
 import NavItem from 'components/NavBar/NavItem';
@@ -30,12 +31,20 @@ const navItems = [
   },
 ];
 
-const NavBar = () => (
+const NavBar = ({ unsolvedReports }) => (
   <div className="px-4 flex flex-row flex-no-wrap justify-between shadow-cvsDark rounded-sm">
     {navItems.map((item) => (
-      <NavItem key={_.uniqueId()} item={item} />
+      <NavItem
+        key={_.uniqueId()}
+        unsolvedReports={unsolvedReports}
+        item={item}
+      />
     ))}
   </div>
 );
+
+NavBar.propTypes = {
+  unsolvedReports: PropTypes.number.isRequired,
+};
 
 export default NavBar;

@@ -8,6 +8,7 @@ module.exports = {
     borderRadius: {
       sm: '0.25rem',
       lg: '1rem',
+      xl: '25rem',
     },
     extend: {
       colors: {

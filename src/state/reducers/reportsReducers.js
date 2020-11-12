@@ -2,6 +2,7 @@ import { actionTypes } from 'state/actions/reportsActions';
 
 const initialState = {
   reports: [],
+  unsolvedReports: 0,
 };
 
 const reportsReducer = (state = initialState, action) => {
@@ -10,6 +11,7 @@ const reportsReducer = (state = initialState, action) => {
       return {
         ...state,
         reports: action.payload.reports,
+        unsolvedReports: action.payload.unsolvedReports,
       };
 
     case actionTypes.SEND_FEEDBACK:
