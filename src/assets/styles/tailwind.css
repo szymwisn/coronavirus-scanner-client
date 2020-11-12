@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 400;
+  src: url(../fonts/Roboto-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 500;
+  src: url(../fonts/Roboto-Medium.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 700;
+  src: url(../fonts/Roboto-Bold.ttf) format('truetype');
+}
+
+body:not(.focus-outline) button:focus,
+body:not(.focus-outline) input:focus {
+  outline: none;
+}
+
+*::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #6e6683 #17131e;
+}
+
+*::-webkit-scrollbar-track {
+  background: #17131e;
+  border-radius: 6px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #6e6683;
+  border: 3px solid #6e6683;
+  border-radius: 6px;
+}
