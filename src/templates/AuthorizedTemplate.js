@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Header from 'components/Header';
 
 const AuthorizedTemplate = ({ children }) => (
-  <div className="flex">{children}</div>
+  <div className="p-5 flex flex-col w-screen h-screen">
+    <Header />
+    <div>{children}</div>
+  </div>
 );
 
 AuthorizedTemplate.propTypes = {
