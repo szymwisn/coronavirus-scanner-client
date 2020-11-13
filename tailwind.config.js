@@ -15,10 +15,14 @@ module.exports = {
         cvsDark: '#212121',
         cvsGray: '#F5F5F5',
         cvsPurple: '#5C59F1',
+        cvsPurpleLighter: '#7774F4',
         cvsRed: '#F45A5A',
       },
       boxShadow: {
         cvsDark: '0 4px 15px 0 rgba(0, 0, 0, 0.15)',
+      },
+      backgroundImage: {
+        'virus-bg': "url('/assets/images/virus.jpg')",
       },
     },
   },

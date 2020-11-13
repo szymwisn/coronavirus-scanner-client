@@ -20,30 +20,30 @@ import UserContext from 'state/context/UserContext';
 import HandleFocusingOutline from 'utils/HandleFocusingOutline';
 
 const Root = () => {
-  const [userId, setUserId] = useState('tempId');
-
   const dispatch = useDispatch();
-  const citizens = useSelector((state) => state.citizensReducers.citizens);
-  const reports = useSelector((state) => state.reportsReducers.reports);
+
+  const user = useSelector((state) => state.userReducer.user);
+  const citizens = useSelector((state) => state.citizensReducer.citizens);
+  const reports = useSelector((state) => state.reportsReducer.reports);
   const unsolvedReports = useSelector(
-    (state) => state.reportsReducers.unsolvedReports,
+    (state) => state.reportsReducer.unsolvedReports,
   );
-  const statistics = useSelector(
-    (state) => state.statisticsReducers.statistics,
-  );
+  const statistics = useSelector((state) => state.statisticsReducer.statistics);
 
   useEffect(() => {
-    dispatch(citizensActions.fetchCitizens());
-    dispatch(reportsActions.fetchReports());
-    dispatch(statisticsActions.fetchStatistics());
-  }, [userId, dispatch]);
+    if (user) {
+      dispatch(citizensActions.fetchCitizens());
+      dispatch(reportsActions.fetchReports());
+      dispatch(statisticsActions.fetchStatistics());
+    }
+  }, [user, dispatch]);
 
   return (
     <>
       <HandleFocusingOutline />
       <BrowserRouter>
-        {userId ? (
-          <UserContext.Provider value={{ userId }}>
+        {user ? (
+          <UserContext.Provider value={user}>
             <AuthorizedTemplate unsolvedReports={unsolvedReports}>
               <Switch>
                 <Route path={routes.reports} exact>

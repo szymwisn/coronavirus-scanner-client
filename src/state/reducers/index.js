@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 
-import citizensReducers from 'state/reducers/citizensReducers';
-import reportsReducers from 'state/reducers/reportsReducers';
-import statisticsReducers from 'state/reducers/statisticsReducers';
+import citizensReducer from 'state/reducers/citizensReducer';
+import reportsReducer from 'state/reducers/reportsReducer';
+import statisticsReducer from 'state/reducers/statisticsReducer';
+import userReducer from 'state/reducers/userReducer';
 
 export default combineReducers({
-  citizensReducers,
-  reportsReducers,
-  statisticsReducers,
+  citizensReducer,
+  reportsReducer,
+  statisticsReducer,
+  userReducer,
 });

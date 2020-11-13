@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Input = ({ value, placeholder, onChange }) => (
+const Input = ({ value, type, placeholder, onChange }) => (
   <input
-    type="text"
+    className="w-full rounded-sm bg-cvsGray shadow-cvsDark px-4 py-2"
+    type={type}
     value={value === undefined ? '' : value}
     placeholder={placeholder}
     onChange={onChange}
@@ -12,8 +13,13 @@ const Input = ({ value, placeholder, onChange }) => (
 
 Input.propTypes = {
   value: PropTypes.string.isRequired,
+  type: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+};
+
+Input.defaultProps = {
+  type: 'text',
 };
 
 export default Input;

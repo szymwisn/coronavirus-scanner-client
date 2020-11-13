@@ -5,7 +5,7 @@ const Button = ({ text, primary, onClick }) => (
   <button
     className={`text-center px-10 py-2 rounded-xl hover:opacity-75 active:opacity-50 transition-all ease-in-out duration-100 ${
       primary
-        ? 'bg-cvsPurple text-cvsGray font-medium'
+        ? 'bg-gradient-to-br from-cvsPurpleLighter to-cvsPurple text-cvsGray font-medium shadow-cvsDark'
         : ' bg-cvsGray text-cvsDark'
     }`}
     type="button"
