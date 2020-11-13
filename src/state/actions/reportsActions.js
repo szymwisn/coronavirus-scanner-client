@@ -60,8 +60,6 @@ export default {
       },
     ];
 
-    console.log(tempReports);
-
     const unsolvedReports = tempReports.filter((report) => !report.solved)
       .length;
 

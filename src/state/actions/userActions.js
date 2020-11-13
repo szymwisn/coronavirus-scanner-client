@@ -7,7 +7,6 @@ export const actionTypes = {
 
 export default {
   login: (loginForm) => (dispatch) => {
-    console.log(loginForm);
     // const url = '';
 
     // axios
