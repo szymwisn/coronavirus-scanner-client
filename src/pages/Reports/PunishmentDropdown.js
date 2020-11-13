@@ -1,25 +1,38 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import _ from 'lodash';
 
-const penalties = [
-  {
-    id: 0,
-    name: 'Kwarantanna',
-  },
-  {
-    id: 1,
-    name: 'Mandat 500 PLN',
-  },
+const PunishmentDropdown = ({ open, punishments, onPunishmentSelection }) => {
+  if (!open) {
+    return null;
+  }
 
-  {
-    id: 2,
-    name: 'Mandat 3 000 PLN',
-  },
-  {
-    id: 3,
-    name: 'Mandat 30 000 PLN',
-  },
-];
+  return (
+    <ul className="p-4 bg-cvsGray shadow-cvsDark rounded-sm leading-6">
+      {punishments.map((penalty) => (
+        <li key={_.uniqueId()}>
+          <button
+            type="button"
+            onClick={() => onPunishmentSelection(penalty.id)}
+            className="hover:opacity-75"
+          >
+            {penalty.name}
+          </button>
+        </li>
+      ))}
+    </ul>
+  );
+};
 
-const PunishmentDropdown = () => <div>PunishmentDropdown</div>;
+PunishmentDropdown.propTypes = {
+  open: PropTypes.bool.isRequired,
+  punishments: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  onPunishmentSelection: PropTypes.func.isRequired,
+};
 
 export default PunishmentDropdown;

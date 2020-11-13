@@ -14,7 +14,10 @@ const Report = ({ report, onAttachmentClick, onFeedbackSend }) => (
     <ReportContent report={report} />
     <div className="flex justify-between mt-4">
       <Attachment attachment={report.attachment} onClick={onAttachmentClick} />
-      <FeedbackButtons onFeedbackSend={onFeedbackSend} />
+      <FeedbackButtons
+        onFeedbackSend={onFeedbackSend}
+        display={!report.solved}
+      />
     </div>
   </div>
 );
