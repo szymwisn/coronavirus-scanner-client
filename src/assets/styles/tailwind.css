@@ -32,16 +32,16 @@ body:not(.focus-outline) input:focus {
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #6e6683 #17131e;
+  scrollbar-color: #5c59f1 #f5f5f5;
 }
 
 *::-webkit-scrollbar-track {
-  background: #17131e;
+  background: #f5f5f5;
   border-radius: 6px;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #6e6683;
-  border: 3px solid #6e6683;
+  background-color: #5c59f1;
+  border: 3px solid #5c59f1;
   border-radius: 6px;
 }
