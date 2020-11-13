@@ -19,7 +19,7 @@ const NavItem = ({ item, unsolvedReports }) => {
   return (
     <Link to={item.path}>
       <div
-        className={`relative flex h-full px-4 flex-col justify-center items-center text-center ${
+        className={`relative flex h-full px-4 flex-col justify-center items-center text-center hover:opacity-75 active:opacity-50 transition-all ease-in-out duration-100 ${
           active
             ? 'border-t-2 border-solid border-cvsPurple'
             : 'border-t-2 border-solid border-white'

@@ -9,7 +9,7 @@ const Attachment = ({ attachment, onClick }) => {
     return (
       <button
         type="button"
-        className="flex bg-cvsGray rounded-sm p-4 items-center"
+        className="flex bg-cvsGray rounded-sm px-4 py-2 items-center hover:opacity-75 active:opacity-50 transition-all ease-in-out duration-100"
         onClick={() => onClick(attachment.src)}
       >
         <Icon size={24} alt="attachment" src={attachmentIcon} />
@@ -19,7 +19,7 @@ const Attachment = ({ attachment, onClick }) => {
   }
 
   return (
-    <div className="flex bg-cvsGray rounded-sm p-4 items-center cursor-default">
+    <div className="flex bg-cvsGray rounded-sm px-4 py-2 items-center cursor-default">
       <Icon size={24} alt="attachment" src={attachmentIcon} />
       <div className="opacity-50 ml-4">Brak załącznika</div>
     </div>

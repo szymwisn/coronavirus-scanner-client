@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 
 const Button = ({ text, primary, onClick }) => (
   <button
-    className={`text-center py-4 px-10 rounded-xl ${
-      primary ? 'bg-cvsPurple text-cvsGray' : ' bg-cvsGray text-cvsDark'
+    className={`text-center px-10 py-2 rounded-xl hover:opacity-75 active:opacity-50 transition-all ease-in-out duration-100 ${
+      primary
+        ? 'bg-cvsPurple text-cvsGray font-medium'
+        : ' bg-cvsGray text-cvsDark'
     }`}
     type="button"
     onClick={onClick}
