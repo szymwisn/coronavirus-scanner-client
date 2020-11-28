@@ -7,73 +7,48 @@ export const actionTypes = {
 
 export default {
   fetchReports: () => (dispatch) => {
-    // const url = '';
+    axios
+      .get('/api/getApplications')
+      .then((response) => {
+        console.log(response.data);
 
-    // axios
-    //   .get(url)
-    //   .then((response) => {
-    //     console.log(response);
-    //     const { reports } = response;
+        const reports = response.data.map((report) => ({
+          attachment: report.picture
+            ? {
+                name: report.picture,
+                src: report.picture,
+              }
+            : null,
+          id: report.id,
+          cause: report.cause.toString(),
+          date: new Date(report.date),
+          description: report.explanation,
+          solved: report.status,
+          sender: `${report.first_name} ${report.second_name}`,
+          lat: report.latitude,
+          long: report.longlitude,
+        }));
 
-    //     if (reports) {
-    //       dispatch({
-    //         type: actionTypes.FETCH_REPORTS,
-    //         payload: { reports },
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+        const unsolvedReports = reports.filter((report) => !report.solved)
+          .length;
 
-    const tempReports = [
-      {
-        attachment: {
-          name: 'obrazek.png',
-          src: '/obrazek.png',
-        },
-        id: '3',
-        cause: 'Example cause',
-        date: new Date(),
-        description: 'Lorem ipsum dolor',
-        solved: false,
-        suspect: 'John Doe',
-      },
-
-      {
-        attachment: null,
-        id: '2',
-        cause: 'Example cause',
-        date: new Date(),
-        description: 'Lorem ipsum dolor',
-        solved: true,
-        suspect: 'John Doe',
-      },
-      {
-        attachment: null,
-        id: '1',
-        cause: 'Good cause',
-        date: new Date(),
-        description: 'Something something something',
-        solved: true,
-        suspect: 'Someone Else',
-      },
-    ];
-
-    const unsolvedReports = tempReports.filter((report) => !report.solved)
-      .length;
-
-    dispatch({
-      type: actionTypes.FETCH_REPORTS,
-      payload: { reports: tempReports, unsolvedReports },
-    });
+        dispatch({
+          type: actionTypes.FETCH_REPORTS,
+          payload: { reports, unsolvedReports },
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 
   sendFeedback: (reportId, feedbackType) => (dispatch) => {
-    const url = '';
-
     axios
-      .post(url)
+      .post('/api/updateApplication', {
+        applicationId: reportId,
+        punishment: feedbackType,
+        status: true,
+      })
       .then((response) => {
         console.log(response);
         dispatch({

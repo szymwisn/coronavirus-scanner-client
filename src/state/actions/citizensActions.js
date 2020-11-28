@@ -1,4 +1,4 @@
-// import axios from 'axios';
+import axios from 'axios';
 
 export const actionTypes = {
   FETCH_CITIZENS: 'FETCH_CITIZENS',
@@ -6,54 +6,29 @@ export const actionTypes = {
 
 export default {
   fetchCitizens: () => (dispatch) => {
-    // const url = '';
-    //
-    // axios
-    //   .get(url)
-    //   .then((response) => {
-    //     console.log(response);
-    //     const { citizens } = response;
-    //     if (citizens) {
-    //       dispatch({
-    //         type: actionTypes.FETCH_CITIZENS,
-    //         payload: { citizens },
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axios
+      .get('/api/users/')
+      .then((response) => {
+        console.log(response.data);
+        const citizens = response.data;
 
-    const tempCitizens = [
-      {
-        name: 'John Doe',
-        address: 'Wroclaw, ul. Dluga 5',
-        debt: 1000,
-        quarantine: 14,
-      },
-      {
-        name: 'Max Mustermann',
-        address: 'Berlin, ul. Lange 1',
-        debt: 0,
-        quarantine: 3,
-      },
-      {
-        name: 'Jan Kowalski',
-        address: 'Warszawa, ul. Marszałkowska 25',
-        debt: 3000,
-        quarantine: 0,
-      },
-      {
-        name: 'Someone Else',
-        address: 'Olsztyn, ul. Słowackiego 1',
-        debt: 3000,
-        quarantine: 4,
-      },
-    ];
-
-    dispatch({
-      type: actionTypes.FETCH_CITIZENS,
-      payload: { citizens: tempCitizens },
-    });
+        dispatch({
+          type: actionTypes.FETCH_CITIZENS,
+          payload: {
+            citizens: citizens
+              .filter((citizen) => !citizen.is_worker)
+              .map((citizen) => ({
+                name: `${citizen.first_name} ${citizen.second_name}`,
+                address: `${citizen.city}, ul. ${citizen.street} ${citizen.hause_number}/${citizen.apartment_number}`,
+                debt: citizen.debt,
+                quarantine: citizen.quarantine_days_left,
+                sentApplications: citizen.applications,
+              })),
+          },
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };

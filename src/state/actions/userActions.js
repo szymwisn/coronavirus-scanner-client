@@ -1,4 +1,5 @@
-// import axios from 'axios';
+import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 
 export const actionTypes = {
   LOGIN: 'LOGIN',
@@ -7,34 +8,54 @@ export const actionTypes = {
 
 export default {
   login: (loginForm) => (dispatch) => {
-    // const url = '';
+    const tokenFromLocalStorage = localStorage.getItem('jwt');
 
-    // axios
-    //   .post(url, loginForm)
-    //   .then((response) => {
-    //     console.log(response);
-    //     const { userId } = response;
+    if (!tokenFromLocalStorage) {
+      axios
+        .post('/api/signin', loginForm)
+        .then((response) => {
+          const { token } = response.data;
+          const decodedToken = jwtDecode(token);
 
-    //     if (userId) {
-    //       dispatch({
-    //         type: actionTypes.LOGIN,
-    //         payload: { userId },
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+          const user = {
+            id: decodedToken.user_id,
+            name: decodedToken.username,
+          };
 
-    const tempUser = {
-      id: 'userId',
-      name: 'John Doe',
-    };
+          localStorage.setItem('jwt', token);
 
-    dispatch({ type: actionTypes.LOGIN, payload: { user: tempUser } });
+          dispatch({
+            type: actionTypes.LOGIN,
+            payload: {
+              user,
+            },
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      const decodedToken = jwtDecode(tokenFromLocalStorage);
+
+      const user = {
+        id: decodedToken.user_id,
+        name: decodedToken.username,
+      };
+
+      dispatch({
+        type: actionTypes.LOGIN,
+        payload: {
+          user,
+        },
+      });
+    }
   },
 
   logout: () => {
-    return { type: actionTypes.LOGOUT };
+    localStorage.removeItem('jwt');
+
+    return {
+      type: actionTypes.LOGOUT,
+    };
   },
 };

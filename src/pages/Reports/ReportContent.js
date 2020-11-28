@@ -11,7 +11,7 @@ const ReportContent = ({ report }) => (
     </div>
     <div className="my-4">
       <div>
-        <span className="font-medium">Podejrzany: </span> {report.suspect}
+        <span className="font-medium">Wysyłający: </span> {report.sender}
       </div>
       <div>
         <span className="font-medium">Powód: </span> {report.cause}
@@ -27,12 +27,12 @@ ReportContent.propTypes = {
       name: PropTypes.string.isRequired,
       src: PropTypes.string.isRequired,
     }),
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     cause: PropTypes.string.isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
     description: PropTypes.string.isRequired,
     solved: PropTypes.bool.isRequired,
-    suspect: PropTypes.string.isRequired,
+    sender: PropTypes.string.isRequired,
   }).isRequired,
 };
 

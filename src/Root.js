@@ -15,7 +15,7 @@ import UnauthorizedTemplate from 'templates/UnauthorizedTemplate';
 import citizensActions from 'state/actions/citizensActions';
 import reportsActions from 'state/actions/reportsActions';
 import statisticsActions from 'state/actions/statisticsActions';
-import UserContext from 'state/context/UserContext';
+import userActions from 'state/actions/userActions';
 
 import HandleFocusingOutline from 'utils/HandleFocusingOutline';
 
@@ -31,6 +31,10 @@ const Root = () => {
   const statistics = useSelector((state) => state.statisticsReducer.statistics);
 
   useEffect(() => {
+    dispatch(userActions.login(null));
+  }, [dispatch]);
+
+  useEffect(() => {
     if (user) {
       dispatch(citizensActions.fetchCitizens());
       dispatch(reportsActions.fetchReports());
@@ -43,25 +47,23 @@ const Root = () => {
       <HandleFocusingOutline />
       <BrowserRouter>
         {user ? (
-          <UserContext.Provider value={user}>
-            <AuthorizedTemplate unsolvedReports={unsolvedReports}>
-              <Switch>
-                <Route path={routes.reports} exact>
-                  <Reports reports={reports} />
-                </Route>
-                <Route path={routes.statistics} exact>
-                  <Statistics statistics={statistics} />
-                </Route>
-                <Route path={routes.citizens} exact>
-                  <Citizens citizens={citizens} />
-                </Route>
-                <Route
-                  path={routes.wildcard}
-                  render={() => <Redirect to={routes.reports} />}
-                />
-              </Switch>
-            </AuthorizedTemplate>
-          </UserContext.Provider>
+          <AuthorizedTemplate unsolvedReports={unsolvedReports} user={user}>
+            <Switch>
+              <Route path={routes.reports} exact>
+                <Reports reports={reports} />
+              </Route>
+              <Route path={routes.statistics} exact>
+                <Statistics statistics={statistics} />
+              </Route>
+              <Route path={routes.citizens} exact>
+                <Citizens citizens={citizens} />
+              </Route>
+              <Route
+                path={routes.wildcard}
+                render={() => <Redirect to={routes.reports} />}
+              />
+            </Switch>
+          </AuthorizedTemplate>
         ) : (
           <UnauthorizedTemplate>
             <Switch>

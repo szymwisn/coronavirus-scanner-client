@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -6,19 +6,13 @@ import userActions from 'state/actions/userActions';
 import Logo from 'components/Logo';
 import NavBar from 'components/NavBar';
 import Button from 'components/Button';
-import UserContext from 'state/context/UserContext';
 
-const Header = ({ unsolvedReports }) => {
-  const user = useContext(UserContext);
+const Header = ({ user, unsolvedReports }) => {
   const dispatch = useDispatch();
 
   const handleLogoutClick = () => {
     dispatch(userActions.logout());
   };
-
-  useEffect(() => {
-    console.log(user);
-  });
 
   return (
     <div className="flex w-full justify-between">
@@ -36,7 +30,7 @@ const Header = ({ unsolvedReports }) => {
 
 Header.propTypes = {
   user: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
   unsolvedReports: PropTypes.number.isRequired,

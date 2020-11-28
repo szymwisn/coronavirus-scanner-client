@@ -11,18 +11,16 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   const handleLoginChange = (e) => {
-    console.log(e.target.value);
     setLogin(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
-    console.log(e.target.value);
     setPassword(e.target.value);
   };
 
   const handleLoginClick = () => {
     if (login && password) {
-      dispatch(userActions.login({ login, password }));
+      dispatch(userActions.login({ email: login, password }));
     }
   };
 
@@ -32,7 +30,11 @@ const Login = () => {
         Panel logowania - SANEPID
       </div>
       <div className="flex flex-col items-end mt-4">
-        <Input value={login} placeholder="Login" onChange={handleLoginChange} />
+        <Input
+          value={login}
+          placeholder="E-mail"
+          onChange={handleLoginChange}
+        />
         <div className="mt-4 w-full">
           <Input
             value={password}

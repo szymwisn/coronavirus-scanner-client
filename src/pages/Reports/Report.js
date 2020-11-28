@@ -15,8 +15,9 @@ const Report = ({ report, onAttachmentClick, onFeedbackSend }) => (
     <div className="flex justify-between mt-4">
       <Attachment attachment={report.attachment} onClick={onAttachmentClick} />
       <FeedbackButtons
-        onFeedbackSend={onFeedbackSend}
         display={!report.solved}
+        reportId={report.id}
+        onFeedbackSend={onFeedbackSend}
       />
     </div>
   </div>
@@ -28,12 +29,12 @@ Report.propTypes = {
       name: PropTypes.string.isRequired,
       src: PropTypes.string.isRequired,
     }),
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     cause: PropTypes.string.isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
     description: PropTypes.string.isRequired,
     solved: PropTypes.bool.isRequired,
-    suspect: PropTypes.string.isRequired,
+    sender: PropTypes.string.isRequired,
   }).isRequired,
   onAttachmentClick: PropTypes.func.isRequired,
   onFeedbackSend: PropTypes.func.isRequired,

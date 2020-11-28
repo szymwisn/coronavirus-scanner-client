@@ -28,7 +28,7 @@ const responses = [
   },
 ];
 
-const FeedbackButtons = ({ display, onFeedbackSend }) => {
+const FeedbackButtons = ({ display, reportId, onFeedbackSend }) => {
   const dropdownRef = useRef();
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -36,7 +36,7 @@ const FeedbackButtons = ({ display, onFeedbackSend }) => {
 
   const handlePunishmentSelection = (punishmentId) => {
     setDropdownOpen(false);
-    onFeedbackSend('a', punishmentId);
+    onFeedbackSend(reportId, punishmentId);
   };
 
   if (!display) {
@@ -47,7 +47,7 @@ const FeedbackButtons = ({ display, onFeedbackSend }) => {
     <div className="flex relative">
       <Button
         text={responses[0].name}
-        onClick={() => onFeedbackSend('a', responses[0].id)}
+        onClick={() => onFeedbackSend(reportId, responses[0].id)}
       />
       <span className="ml-5">
         <Button text="Ukaraj" primary onClick={() => setDropdownOpen(true)} />
@@ -69,6 +69,7 @@ const FeedbackButtons = ({ display, onFeedbackSend }) => {
 
 FeedbackButtons.propTypes = {
   display: PropTypes.bool.isRequired,
+  reportId: PropTypes.number.isRequired,
   onFeedbackSend: PropTypes.func.isRequired,
 };
 
