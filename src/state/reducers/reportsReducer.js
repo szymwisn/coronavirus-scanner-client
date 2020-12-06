@@ -17,6 +17,16 @@ const reportsReducer = (state = initialState, action) => {
     case actionTypes.SEND_FEEDBACK:
       return {
         ...state,
+        reports: state.reports.map((report) => {
+          if (report.id === action.payload.reportId) {
+            return {
+              ...report,
+              solved: true,
+            };
+          }
+          return report;
+        }),
+        unsolvedReports: state.unsolvedReports - 1,
       };
 
     default:

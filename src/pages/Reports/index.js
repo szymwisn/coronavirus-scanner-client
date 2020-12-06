@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 
@@ -18,6 +18,12 @@ const Reports = ({ reports }) => {
 
     dispatch(reportsActions.sendFeedback(reportId, feedbackType));
   };
+
+  useEffect(() => {
+    if (reports) {
+      reports.sort((a, b) => (a.solved > b.solved ? 1 : -1));
+    }
+  }, [reports]);
 
   return (
     <div className="flex flex-col items-center">

@@ -44,11 +44,19 @@ export default {
 
   sendFeedback: (reportId, feedbackType) => (dispatch) => {
     axios
-      .post('/api/updateApplication', {
-        applicationId: reportId,
-        punishment: feedbackType,
-        status: true,
-      })
+      .put(
+        '/api/updateApplication',
+        {
+          applicationId: reportId,
+          punishment: feedbackType,
+          status: true,
+        },
+        {
+          headers: {
+            Authorization: `JWT ${localStorage.getItem('jwt')}`,
+          },
+        },
+      )
       .then((response) => {
         console.log(response);
         dispatch({
