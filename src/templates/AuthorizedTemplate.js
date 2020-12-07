@@ -6,7 +6,7 @@ import Header from 'components/Header';
 const AuthorizedTemplate = ({ user, children, unsolvedReports }) => (
   <div className="p-5 flex flex-col w-screen h-screen">
     <Header unsolvedReports={unsolvedReports} user={user} />
-    <div className="mt-20">{children}</div>
+    <div className="mt-20 h-full overflow-hidden">{children}</div>
   </div>
 );
 

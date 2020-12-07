@@ -5,6 +5,7 @@ import _ from 'lodash';
 import Report from 'pages/Reports/Report';
 import { useDispatch } from 'react-redux';
 import reportsActions from 'state/actions/reportsActions';
+import Map from './Map';
 
 const Reports = ({ reports }) => {
   const dispatch = useDispatch();
@@ -26,15 +27,24 @@ const Reports = ({ reports }) => {
   }, [reports]);
 
   return (
-    <div className="flex flex-col items-center">
-      {reports.map((report) => (
-        <Report
-          key={_.uniqueId()}
-          report={report}
+    <div className="w-full h-full flex flex-row justify-between">
+      <div className="w-1/2 h-full mr-3">
+        <Map
+          reports={reports}
           onAttachmentClick={handleAttachmentClick}
           onFeedbackSend={handleFeedbackSend}
         />
-      ))}
+      </div>
+      <div className="w-1/2 h-full ml-3 flex flex-col overflow-auto">
+        {reports.map((report) => (
+          <Report
+            key={_.uniqueId()}
+            report={report}
+            onAttachmentClick={handleAttachmentClick}
+            onFeedbackSend={handleFeedbackSend}
+          />
+        ))}
+      </div>
     </div>
   );
 };

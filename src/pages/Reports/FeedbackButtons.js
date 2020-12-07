@@ -53,8 +53,8 @@ const FeedbackButtons = ({ display, reportId, onFeedbackSend }) => {
         <Button text="Ukaraj" primary onClick={() => setDropdownOpen(true)} />
       </span>
       <div
-        style={{ right: '-170px' }}
-        className="absolute top-0 z-10"
+        style={{ top: '45px' }}
+        className="absolute right-0 z-10"
         ref={dropdownRef}
       >
         <PunishmentDropdown

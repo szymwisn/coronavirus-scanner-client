@@ -5,20 +5,22 @@ import Attachment from './Attachment';
 import FeedbackButtons from './FeedbackButtons';
 import ReportContent from './ReportContent';
 
-const Report = ({ report, onAttachmentClick, onFeedbackSend }) => (
+const Report = ({ report, map, onAttachmentClick, onFeedbackSend }) => (
   <div
-    className={`w-3/5 mb-10 ${
+    className={`w-full ${map ? '' : 'mb-10'} ${
       report.solved ? 'cursor-default opacity-50' : ''
     }`}
   >
     <ReportContent report={report} />
-    <div className="flex justify-between mt-4">
+    <div className={`flex justify-between mt-4 ${map ? 'flex-col' : ''}`}>
       <Attachment attachment={report.attachment} onClick={onAttachmentClick} />
-      <FeedbackButtons
-        display={!report.solved}
-        reportId={report.id}
-        onFeedbackSend={onFeedbackSend}
-      />
+      <div className={`${map ? 'mt-4' : ''}`}>
+        <FeedbackButtons
+          display={!report.solved}
+          reportId={report.id}
+          onFeedbackSend={onFeedbackSend}
+        />
+      </div>
     </div>
   </div>
 );
@@ -36,8 +38,13 @@ Report.propTypes = {
     solved: PropTypes.bool.isRequired,
     sender: PropTypes.string.isRequired,
   }).isRequired,
+  map: PropTypes.bool,
   onAttachmentClick: PropTypes.func.isRequired,
   onFeedbackSend: PropTypes.func.isRequired,
+};
+
+Report.defaultProps = {
+  map: false,
 };
 
 export default Report;
