@@ -13,7 +13,11 @@ const Report = ({ report, map, onAttachmentClick, onFeedbackSend }) => (
   >
     <ReportContent report={report} />
     <div className={`flex justify-between mt-4 ${map ? 'flex-col' : ''}`}>
-      <Attachment attachment={report.attachment} onClick={onAttachmentClick} />
+      <Attachment
+        attachment={report.attachment}
+        onClick={onAttachmentClick}
+        disabled={report.solved}
+      />
       <div className={`${map ? 'mt-4' : ''}`}>
         <FeedbackButtons
           display={!report.solved}

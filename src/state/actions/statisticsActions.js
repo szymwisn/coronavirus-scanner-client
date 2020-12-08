@@ -49,7 +49,10 @@ export default {
             name: 'Skuteczność',
             value: `${
               stats.recived_forms !== 0
-                ? (stats.total_punishments / stats.recived_forms).toFixed(2)
+                ? (
+                    (100 * stats.total_punishments) /
+                    stats.recived_forms
+                  ).toFixed(2)
                 : 0
             }%`,
           },
@@ -57,7 +60,10 @@ export default {
             name: 'Nierozwiązane zgłoszenia',
             value: `${
               stats.recived_forms !== 0
-                ? (stats.total_punishments / stats.recived_forms).toFixed(2)
+                ? (
+                    (100 * stats.total_punishments) /
+                    stats.recived_forms
+                  ).toFixed(2)
                 : 0
             }%`,
           },
