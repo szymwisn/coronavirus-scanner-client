@@ -17,6 +17,8 @@ module.exports = {
         cvsPurple: '#5C59F1',
         cvsPurpleLighter: '#7774F4',
         cvsRed: '#F45A5A',
+        cvsYellow: '#E8BB48',
+        cvsGreen: '#29C567',
       },
       boxShadow: {
         cvsDark: '0 4px 15px 0 rgba(0, 0, 0, 0.15)',

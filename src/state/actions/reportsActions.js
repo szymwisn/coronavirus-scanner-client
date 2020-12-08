@@ -3,6 +3,7 @@ import axios from 'axios';
 export const actionTypes = {
   FETCH_REPORTS: 'FETCH_REPORTS',
   SEND_FEEDBACK: 'SEND_FEEDBACK',
+  FAILURE: 'FAILURE',
 };
 
 export default {
@@ -10,8 +11,6 @@ export default {
     axios
       .get('/api/getApplications')
       .then((response) => {
-        console.log(response.data);
-
         const reports = response.data.map((report) => ({
           attachment: report.picture
             ? {
@@ -37,8 +36,14 @@ export default {
           payload: { reports, unsolvedReports },
         });
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((_) => {
+        dispatch({
+          type: actionTypes.FAILURE,
+          notification: {
+            type: 'error',
+            message: 'Nie udało się pobrać listy zgłoszeń!',
+          },
+        });
       });
   },
 
@@ -57,15 +62,24 @@ export default {
           },
         },
       )
-      .then((response) => {
-        console.log(response);
+      .then((_) => {
         dispatch({
           type: actionTypes.SEND_FEEDBACK,
           payload: { reportId, feedbackType },
+          notification: {
+            type: 'success',
+            message: 'Zamknięto zgłoszenie!',
+          },
         });
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((_) => {
+        dispatch({
+          type: actionTypes.FAILURE,
+          notification: {
+            type: 'error',
+            message: 'Nie udało się zamknąć zgłoszenia!',
+          },
+        });
       });
   },
 };

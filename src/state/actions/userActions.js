@@ -4,6 +4,7 @@ import jwtDecode from 'jwt-decode';
 export const actionTypes = {
   LOGIN: 'LOGIN',
   LOGOUT: 'LOGOUT',
+  FAILURE: 'FAILURE',
 };
 
 export default {
@@ -31,8 +32,14 @@ export default {
             },
           });
         })
-        .catch((err) => {
-          console.log(err);
+        .catch((_) => {
+          dispatch({
+            type: actionTypes.FAILURE,
+            notification: {
+              type: 'error',
+              message: 'Nie udało się zalogować!',
+            },
+          });
         });
     } else {
       const decodedToken = jwtDecode(tokenFromLocalStorage);
@@ -56,6 +63,10 @@ export default {
 
     return {
       type: actionTypes.LOGOUT,
+      notification: {
+        type: 'success',
+        message: 'Wylogowano pomyślnie!',
+      },
     };
   },
 };

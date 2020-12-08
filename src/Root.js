@@ -18,6 +18,7 @@ import statisticsActions from 'state/actions/statisticsActions';
 import userActions from 'state/actions/userActions';
 
 import HandleFocusingOutline from 'utils/HandleFocusingOutline';
+import Notifications from 'components/Notifications';
 
 const Root = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,9 @@ const Root = () => {
     (state) => state.reportsReducer.unsolvedReports,
   );
   const statistics = useSelector((state) => state.statisticsReducer.statistics);
+  const notifications = useSelector(
+    (state) => state.notificationReducer.notifications,
+  );
 
   useEffect(() => {
     dispatch(userActions.login(null));
@@ -44,6 +48,7 @@ const Root = () => {
 
   return (
     <>
+      <Notifications notifications={notifications} />
       <HandleFocusingOutline />
       <BrowserRouter>
         {user ? (

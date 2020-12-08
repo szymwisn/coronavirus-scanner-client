@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const actionTypes = {
   FETCH_CITIZENS: 'FETCH_CITIZENS',
+  FAILURE: 'FAILURE',
 };
 
 export default {
@@ -9,7 +10,6 @@ export default {
     axios
       .get('/api/users/')
       .then((response) => {
-        console.log(response.data);
         const citizens = response.data;
 
         dispatch({
@@ -27,8 +27,14 @@ export default {
           },
         });
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((_) => {
+        dispatch({
+          type: actionTypes.FAILURE,
+          notification: {
+            type: 'error',
+            message: 'Nie udało się pobrać listy obywateli!',
+          },
+        });
       });
   },
 };

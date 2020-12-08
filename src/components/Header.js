@@ -20,7 +20,7 @@ const Header = ({ user, unsolvedReports }) => {
       <NavBar unsolvedReports={unsolvedReports} />
       <div className="flex items-center">
         <div className="mr-4">
-          Hello, <span className="font-medium">{user.name}</span>
+          Witaj, <span className="font-medium">{user.name}</span>
         </div>
         <Button text="Wyloguj" onClick={handleLogoutClick} />
       </div>
